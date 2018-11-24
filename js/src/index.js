@@ -1,12 +1,13 @@
-var fs = require('fs');
+var fs = require("fs");
+var eventCounter = require("./eventCounter");
 
 function fetchFromFile(stream) {
   return new Promise((resolve, reject) => {
-    fs.readFile(stream, 'utf-8', (err, data) => {
-      if(err) reject(err);
+    fs.readFile(stream, "utf-8", (err, data) => {
+      if (err) reject(err);
 
       resolve(JSON.parse(data));
-    })
+    });
   });
 }
 
@@ -22,11 +23,6 @@ function transformTimestampToDate(events) {
 
 var fileName = process.argv[2];
 fetchFromFile(fileName)
-    .then(events => transformTimestampToDate(events))
-    .then(events => console.log(eventCounter(events)))
-    .catch(error => console.log(error))
-
-// Write your projection here
-function eventCounter(events) {
-  return events.reduce((acc, event) => acc + 1, 0);
-}
+  .then(events => transformTimestampToDate(events))
+  .then(events => console.log(eventCounter(events)))
+  .catch(error => console.log(error));
