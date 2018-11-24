@@ -1,28 +1,38 @@
 var fs = require("fs");
 var eventCounter = require("./eventCounter");
+var numberOfRegisteredPlayers = require("./numberOfRegisteredPlayers");
 
-function fetchFromFile(stream) {
-  return new Promise((resolve, reject) => {
-    fs.readFile(stream, "utf-8", (err, data) => {
-      if (err) reject(err);
+const dataSets = [
+  "0.json",
+  "10_2015_01_2016_01.json",
+  "1.json",
+  "2.json",
+  "4_2015_01_2017_01.json",
+  "5_2015_01_2017_01.json",
+  "6_2015_01_2017_01.json",
+  "7_2015_01_2017_01.json",
+  "8_2015_01_2016_01.json",
+  "9_2015_01_2016_01.json"
+];
 
-      resolve(JSON.parse(data));
-    });
-  });
+const projections = { eventCounter, numberOfRegisteredPlayers };
+
+function parseFile(file) {
+  return JSON.parse(fs.readFileSync(file, "utf-8"));
 }
 
-// If you want to have the timestamps of the event as a Date object rather than a string, enable this
-// transformation. This transformation mutates the events. After the transformation, the timestamp is a Date
-// Also see https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date for more info.
-function transformTimestampToDate(events) {
-  return events.map(event => {
-    event.timestamp = new Date(event.timestamp);
-    return event;
-  });
-}
+const loadedDataSets = dataSets.reduce(
+  (data, filename) =>
+    Object.assign({}, data, { [filename]: parseFile(`../data/${filename}`) }),
+  {}
+);
 
-var fileName = process.argv[2];
-fetchFromFile(fileName)
-  .then(events => transformTimestampToDate(events))
-  .then(events => console.log(eventCounter(events)))
-  .catch(error => console.log(error));
+for (let projection in projections) {
+  for (let dataSet in loadedDataSets) {
+    console.log(
+      `${projection}\t${dataSet}: ${projections[projection](
+        loadedDataSets[dataSet]
+      )}`
+    );
+  }
+}
