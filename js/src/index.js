@@ -1,6 +1,7 @@
 var fs = require("fs");
 var eventCounter = require("./eventCounter");
 var numberOfRegisteredPlayers = require("./numberOfRegisteredPlayers");
+var numberOfRegisteredPlayersByMonth = require("./numberOfRegisteredPlayersByMonth");
 
 const dataSets = [
   "0.json",
@@ -15,7 +16,11 @@ const dataSets = [
   "9_2015_01_2016_01.json"
 ];
 
-const projections = { eventCounter, numberOfRegisteredPlayers };
+const projections = {
+  eventCounter,
+  numberOfRegisteredPlayers,
+  numberOfRegisteredPlayersByMonth
+};
 
 function parseFile(file) {
   return JSON.parse(fs.readFileSync(file, "utf-8"));
@@ -30,8 +35,8 @@ const loadedDataSets = dataSets.reduce(
 for (let projection in projections) {
   for (let dataSet in loadedDataSets) {
     console.log(
-      `${projection}\t${dataSet}: ${projections[projection](
-        loadedDataSets[dataSet]
+      `${projection}\t${dataSet}: ${JSON.stringify(
+        projections[projection](loadedDataSets[dataSet])
       )}`
     );
   }
