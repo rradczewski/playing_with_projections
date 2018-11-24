@@ -1,6 +1,3 @@
-// Write your projection here
-function eventCounter(events) {
-  return events.reduce((acc, event) => acc + 1, 0);
-}
+const fold = require("./_fold");
 
-module.exports = eventCounter;
+module.exports = fold(count => count + 1, 0);
