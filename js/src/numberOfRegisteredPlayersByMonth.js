@@ -1,12 +1,12 @@
-const fold = require("./_fold");
+const { project, on } = require("./_project");
 
-module.exports = fold((state, event) => {
-  if (event.type !== "PlayerHasRegistered") return state;
+module.exports = project(
+  on("PlayerHasRegistered", (state, event) => {
+    const key = event.timestamp.substr(0, 7);
 
-  const key = event.timestamp.substr(0, 7);
-
-  return {
-    ...state,
-    [key]: (state[key] || 0)+1
-  };
-}, {});
+    return {
+      ...state,
+      [key]: (state[key] || 0) + 1
+    };
+  })
+)({});

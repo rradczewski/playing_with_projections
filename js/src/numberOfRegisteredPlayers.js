@@ -1,6 +1,3 @@
-const fold = require("./_fold");
+const { project, on } = require("./_project");
 
-module.exports = fold((state, event) => {
-  if (event.type === "PlayerHasRegistered") return state + 1;
-  return state;
-}, 0);
+module.exports = project(on("PlayerHasRegistered", state => state + 1))(0);
