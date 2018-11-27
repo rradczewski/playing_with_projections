@@ -3,6 +3,8 @@ var eventCounter = require("./eventCounter");
 var numberOfRegisteredPlayers = require("./numberOfRegisteredPlayers");
 var numberOfRegisteredPlayersByMonth = require("./numberOfRegisteredPlayersByMonth");
 var popularQuizzes = require("./popularQuizzes");
+var hardestQuestion = require("./hardestQuestion");
+var easiestQuestion = require("./easiestQuestion");
 
 const dataSets = [
   "0.json",
@@ -21,7 +23,9 @@ const projections = {
   eventCounter,
   numberOfRegisteredPlayers,
   numberOfRegisteredPlayersByMonth,
-  popularQizzes: e => popularQuizzes(e).slice(0, 2)
+  popularQizzes: e => popularQuizzes(e).slice(0, 2),
+  hardestQuestion,
+  easiestQuestion
 };
 
 function parseFile(file) {
