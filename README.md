@@ -2,6 +2,8 @@
 
 See [michelgrootjans/playing_with_projections](https://github.com/michelgrootjans/playing_with_projections/blob/master/README.md) for the original README and initial instructions.
 
+Slides from me are [here](slides.pdf).
+
 ## Challenges
 
  - How many events does a stream have?
