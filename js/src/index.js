@@ -5,18 +5,14 @@ var numberOfRegisteredPlayersByMonth = require("./numberOfRegisteredPlayersByMon
 var popularQuizzes = require("./popularQuizzes");
 var hardestQuestion = require("./hardestQuestion");
 var easiestQuestion = require("./easiestQuestion");
+var neverPlayed = require("./neverPlayed");
 
 const dataSets = [
   "0.json",
-  "10_2015_01_2016_01.json",
   "1.json",
   "2.json",
-  "4_2015_01_2017_01.json",
   "5_2015_01_2017_01.json",
-  "6_2015_01_2017_01.json",
-  "7_2015_01_2017_01.json",
-  "8_2015_01_2016_01.json",
-  "9_2015_01_2016_01.json"
+  "10_2015_01_2016_01.json",
 ];
 
 const projections = {
@@ -25,7 +21,8 @@ const projections = {
   numberOfRegisteredPlayersByMonth,
   popularQizzes: e => popularQuizzes(e).slice(0, 2),
   hardestQuestion,
-  easiestQuestion
+  easiestQuestion,
+  neverPlayed
 };
 
 function parseFile(file) {
