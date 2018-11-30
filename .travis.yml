@@ -1,12 +1,28 @@
 matrix:
   include:
-    - name: "JavaScript"
-      language: node_js
+    - language: csharp
+      before_install: cd csharp
+      dotnet: 2.0.3
+
+    - language: clojure
+      before_install: cd clojure
+
+    - language: elm
+      before_install: cd elm
+
+    - language: elixir
+      before_install: cd elixir
+
+    - language: java
+      before_install: cd java
+      script: ./gradlew test
+    
+    - language: node_js
       node_js: "node"
       before_install: cd js
 
-    - name: "Java"
-      language: java
-      before_install: cd java
+    - language: kotlin
+      before_install: cd kotlin
       script: ./gradlew test
+      
 
