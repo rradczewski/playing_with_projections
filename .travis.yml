@@ -1,0 +1,13 @@
+matrix:
+  include:
+    - name: "JavaScript"
+      language: node_js
+      before_install: cd js
+      install: npm install
+      script: npm test
+
+    - name: "Java"
+      language: java
+      before_install: cd java
+      script: ./gradlew test
+
