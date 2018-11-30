@@ -2,9 +2,8 @@ matrix:
   include:
     - name: "JavaScript"
       language: node_js
+      node_js: "node"
       before_install: cd js
-      install: npm install
-      script: npm test
 
     - name: "Java"
       language: java
